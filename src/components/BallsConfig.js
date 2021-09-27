@@ -1,11 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { func } from 'prop-types';
 
 import Circle from './Circle';
 import DrawBallsIcon from '../images/draw_balls.png';
 import { RED_COLOR, BLUE_COLOR, GREEN_COLOR} from '../constants/colors';
-import { ballsConfigDataType } from '../types';
 import { updateBallsConfig } from '../actions/BallsConfigActions';
 
 class BallsConfig extends React.Component {
@@ -37,7 +37,6 @@ class BallsConfig extends React.Component {
         return (
             <table>
                 <tbody>
-                    <tr colSpan="9"><td>球數</td></tr>
                     <tr>
                         <td><Circle bgColor={RED_COLOR}></Circle></td>
                         <td><input id="redBallsCount" type="number" maxLength="2" min="1" max="99" style={{width: "60px"}} value={redBallsCount} onChange={this.handleFormChange} /></td>
@@ -56,9 +55,7 @@ class BallsConfig extends React.Component {
 }
 
 function mapStateToProps(state) {
-	return {
-		ballsConfigData: state.ballsConfigData
-	};
+	return {};
 }
 
 function mapDispatchToProps(dispatch) {
@@ -68,7 +65,7 @@ function mapDispatchToProps(dispatch) {
 }
 
 BallsConfig.propTypes = {
-	ballsConfigData: ballsConfigDataType.isRequired
+	updateBallsConfig: func.isRequired
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(BallsConfig);
