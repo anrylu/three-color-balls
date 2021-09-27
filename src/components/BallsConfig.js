@@ -6,7 +6,7 @@ import { func } from 'prop-types';
 import Circle from './Circle';
 import DrawBallsIcon from '../images/draw_balls.png';
 import { RED_COLOR, BLUE_COLOR, GREEN_COLOR} from '../constants/colors';
-import { updateBallsConfig } from '../actions/BallsConfigActions';
+import { updateBallsConfig, clearCache } from '../actions/BallsConfigActions';
 
 class BallsConfig extends React.Component {
 	constructor() {
@@ -27,9 +27,17 @@ class BallsConfig extends React.Component {
 
     handleFormChange(event) {
 		const inputText = event.target.value;
-		this.setState({
-			[event.target.id]: Number(inputText),
-		});
+        if( event.target.id === 'drawCount' ) {
+            this.setState({
+                [event.target.id]: Number(inputText),
+            });
+        } else {
+            this.setState({
+                redBallsCount: Number(inputText),
+                blueBallsCount: Number(inputText),
+                greenBallsCount: Number(inputText)
+            });
+        }
 	}
 
 	render() {
@@ -44,9 +52,10 @@ class BallsConfig extends React.Component {
                         <td><input id="blueBallsCount" type="number" maxLength="2" min="1" max="99" style={{width: "60px"}} value={blueBallsCount} onChange={this.handleFormChange} /></td>
                         <td><Circle bgColor={GREEN_COLOR}></Circle></td>
                         <td><input id="greenBallsCount" type="number" maxLength="2" min="1" max="99" style={{width: "60px"}} value={greenBallsCount} onChange={this.handleFormChange} /></td>
-                        <td><img src={DrawBallsIcon} style={{width: "30px", height: "30px"}}/></td>
+                        <td><img src={DrawBallsIcon} style={{width: "30px", height: "30px"}} alt="取幾顆球?" /></td>
                         <td><input id="drawCount" type="number" maxLength="3" min="1" max="150" style={{width: "60px"}} value={drawCount} onChange={this.handleFormChange} /></td>
                         <td><button onClick={this.handleApply}>設定</button></td>
+                        <td><button onClick={clearCache}>清快取</button></td>
                     </tr>
                 </tbody>
             </table>

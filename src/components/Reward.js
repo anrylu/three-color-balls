@@ -14,9 +14,9 @@ class Reward extends React.Component {
 
     handleFormChange(event) {
 		const inputText = event.target.value;
-		this.props.updateReward({
-            [event.target.id]: Number(inputText)
-        });
+		this.props.updateReward(
+            this.props.ballsConfigData,
+            {[event.target.id]: Number(inputText)});
 	}
 
 	render() {

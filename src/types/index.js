@@ -1,4 +1,4 @@
-import { shape, bool, string, number, arrayOf, object } from 'prop-types';
+import { shape, number, object } from 'prop-types';
 
 export const ballsConfigDataType = shape({
 	redBallsCount: number.isRequired,
